@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getReadiness, saveReadiness } from "../services/api";
-
+import Navbar from "../components/Navbar";
 const Dashboard = () => {
     const [scores, setScores] = useState({
         dsa: "",
@@ -62,6 +62,8 @@ const Dashboard = () => {
 
     return (
         <div>
+             <Navbar />
+
             <h1>Placement Readiness Dashboard</h1>
 
             <form onSubmit={handleSubmit}>

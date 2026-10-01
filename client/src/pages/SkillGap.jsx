@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { analyzeSkillGap } from "../services/api";
-
+import Navbar from "../components/Navbar";
 const SkillGap = () => {
     const [targetRole, setTargetRole] = useState("Full Stack Developer");
     const [result, setResult] = useState(null);
@@ -19,6 +19,7 @@ const SkillGap = () => {
 
     return (
         <div>
+            <Navbar />
             <h1>Target Role Skill Gap Analyzer</h1>
 
             <label>Select Target Role</label>
