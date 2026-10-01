@@ -50,10 +50,12 @@ const analyzeSkillGap = async (req, res) => {
         });
 
     } catch (error) {
-        res.status(500).json({
-            message: "Failed to analyze skill gap",
-            error: error.message
-        });
+    console.log("Skill gap error:", error);
+    
+    res.status(500).json({
+        message: "Failed to analyze skill gap",
+        error: error.message
+    });
     }
 };
 
