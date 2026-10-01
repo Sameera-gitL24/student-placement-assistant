@@ -2,7 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/db");
-
+const authRoutes = require("./routes/authRoutes");
+//const authMiddleware = require("./middleware/authMiddleware");
 dotenv.config();
 
 const app = express();
@@ -11,6 +12,15 @@ app.use(cors());
 app.use(express.json());
 
 connectDB();
+
+app.use("/api/auth", authRoutes);
+
+// app.get("/api/protected", authMiddleware, (req, res) => {
+//     res.json({
+//         message: "You are authenticated",
+//         userId: req.userId
+//     });
+// });
 
 app.get("/", (req, res) => {
     res.json({ message: "Student Placement Assistant API is running" });
