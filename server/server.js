@@ -6,6 +6,7 @@ const authRoutes = require("./routes/authRoutes");
 
 const readinessRoutes = require("./routes/readinessRoutes");
 
+const skillGapRoutes = require("./routes/skillGapRoutes");
 //const authMiddleware = require("./middleware/authMiddleware");
 dotenv.config();
 
@@ -18,7 +19,7 @@ connectDB();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/readiness", readinessRoutes);
-
+app.use("/api/skill-gap", skillGapRoutes);
 // app.use("/api/auth", authRoutes);
 // app.use("/api/readiness", readinessRoutes);
 // app.get("/api/protected", authMiddleware, (req, res) => {
