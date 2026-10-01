@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { registerUser } from "../services/api";
 
 const Register = () => {
@@ -6,6 +7,7 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -18,45 +20,60 @@ const Register = () => {
             });
 
             setMessage(data.message);
-            setName("");
-            setEmail("");
-            setPassword("");
+
+            setTimeout(() => {
+                navigate("/");
+            }, 1000);
+
         } catch (error) {
             setMessage(error.message);
         }
     };
 
     return (
-        <div>
-            <h2>Student Placement Assistant</h2>
-            <h3>Register</h3>
+        <div className="auth-page">
+            <div className="auth-card">
+                <h1>Student Placement Assistant</h1>
+                <h2>Create Account</h2>
 
-            <form onSubmit={handleRegister}>
-                <input
-                    type="text"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
+                <form onSubmit={handleRegister}>
+                    <label>Name</label>
+                    <input
+                        type="text"
+                        placeholder="Enter your name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
 
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
 
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        placeholder="Create a password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
 
-                <button type="submit">Register</button>
-            </form>
+                    <button type="submit">Register</button>
+                </form>
 
-            {message && <p>{message}</p>}
+                {message && <p className="message">{message}</p>}
+
+                <p className="auth-link">
+                    Already have an account?{" "}
+                    <Link to="/">Login</Link>
+                </p>
+            </div>
         </div>
     );
 };

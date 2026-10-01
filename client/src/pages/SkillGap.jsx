@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { analyzeSkillGap } from "../services/api";
 import Navbar from "../components/Navbar";
+import SkillGapCard from "../components/SkillGapCard";
+
 const SkillGap = () => {
     const [targetRole, setTargetRole] = useState("Full Stack Developer");
     const [result, setResult] = useState(null);
@@ -20,54 +22,37 @@ const SkillGap = () => {
     return (
         <div>
             <Navbar />
+
             <h1>Target Role Skill Gap Analyzer</h1>
 
-            <label>Select Target Role</label>
+            <div className="skill-gap-form">
+                <label>Select Target Role</label>
 
-            <select
-                value={targetRole}
-                onChange={(e) => setTargetRole(e.target.value)}
-            >
-                <option value="Full Stack Developer">
-                    Full Stack Developer
-                </option>
+                <select
+                    value={targetRole}
+                    onChange={(e) => setTargetRole(e.target.value)}
+                >
+                    <option value="Full Stack Developer">
+                        Full Stack Developer
+                    </option>
 
-                <option value="Data Scientist">
-                    Data Scientist
-                </option>
+                    <option value="Data Scientist">
+                        Data Scientist
+                    </option>
 
-                <option value="Java Developer">
-                    Java Developer
-                </option>
-            </select>
+                    <option value="Java Developer">
+                        Java Developer
+                    </option>
+                </select>
 
-            <button onClick={handleAnalyze}>
-                Analyze Skill Gap
-            </button>
+                <button onClick={handleAnalyze}>
+                    Analyze Skill Gap
+                </button>
+            </div>
 
-            {message && <p>{message}</p>}
+            {message && <p className="message">{message}</p>}
 
-            {result && (
-                <div>
-                    <h2>{result.targetRole}</h2>
-
-                    <h3>
-                        Skill Match: {result.readinessPercentage}%
-                    </h3>
-
-                    <h3>Matched Skills</h3>
-
-                    {result.matchedSkills.map((skill) => (
-                        <p key={skill}>✓ {skill}</p>
-                    ))}
-
-                    <h3>Missing Skills</h3>
-
-                    {result.missingSkills.map((skill) => (
-                        <p key={skill}>✗ {skill}</p>
-                    ))}
-                </div>
-            )}
+            {result && <SkillGapCard result={result} />}
         </div>
     );
 };

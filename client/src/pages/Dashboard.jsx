@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getReadiness, saveReadiness } from "../services/api";
 import Navbar from "../components/Navbar";
+import ReadinessCard from "../components/ReadinessCard";
 const Dashboard = () => {
     const [scores, setScores] = useState({
         dsa: "",
@@ -67,82 +68,89 @@ const Dashboard = () => {
             <h1>Placement Readiness Dashboard</h1>
 
             <form onSubmit={handleSubmit}>
-                <label>DSA</label>
-                <input
-                    type="number"
-                    name="dsa"
-                    min="0"
-                    max="100"
-                    value={scores.dsa}
-                    onChange={handleChange}
-                />
+    <div className="score-grid">
+        <div className="score-field">
+            <label>DSA</label>
+            <input
+                type="number"
+                name="dsa"
+                min="0"
+                max="100"
+                value={scores.dsa}
+                onChange={handleChange}
+            />
+        </div>
 
-                <label>Core CS</label>
-                <input
-                    type="number"
-                    name="coreCS"
-                    min="0"
-                    max="100"
-                    value={scores.coreCS}
-                    onChange={handleChange}
-                />
+        <div className="score-field">
+            <label>Core CS</label>
+            <input
+                type="number"
+                name="coreCS"
+                min="0"
+                max="100"
+                value={scores.coreCS}
+                onChange={handleChange}
+            />
+        </div>
 
-                <label>Projects</label>
-                <input
-                    type="number"
-                    name="projects"
-                    min="0"
-                    max="100"
-                    value={scores.projects}
-                    onChange={handleChange}
-                />
+        <div className="score-field">
+            <label>Projects</label>
+            <input
+                type="number"
+                name="projects"
+                min="0"
+                max="100"
+                value={scores.projects}
+                onChange={handleChange}
+            />
+        </div>
 
-                <label>Resume</label>
-                <input
-                    type="number"
-                    name="resume"
-                    min="0"
-                    max="100"
-                    value={scores.resume}
-                    onChange={handleChange}
-                />
+        <div className="score-field">
+            <label>Resume</label>
+            <input
+                type="number"
+                name="resume"
+                min="0"
+                max="100"
+                value={scores.resume}
+                onChange={handleChange}
+            />
+        </div>
 
-                <label>Aptitude</label>
-                <input
-                    type="number"
-                    name="aptitude"
-                    min="0"
-                    max="100"
-                    value={scores.aptitude}
-                    onChange={handleChange}
-                />
+        <div className="score-field">
+            <label>Aptitude</label>
+            <input
+                type="number"
+                name="aptitude"
+                min="0"
+                max="100"
+                value={scores.aptitude}
+                onChange={handleChange}
+            />
+        </div>
 
-                <label>Communication</label>
-                <input
-                    type="number"
-                    name="communication"
-                    min="0"
-                    max="100"
-                    value={scores.communication}
-                    onChange={handleChange}
-                />
+        <div className="score-field">
+            <label>Communication</label>
+            <input
+                type="number"
+                name="communication"
+                min="0"
+                max="100"
+                value={scores.communication}
+                onChange={handleChange}
+            />
+        </div>
+    </div>
 
-                <button type="submit">Calculate Readiness</button>
-            </form>
+    <button type="submit">Calculate Readiness</button>
+</form>
 
-            {overallScore !== null && (
-                <div>
-                    <h2>Overall Readiness: {overallScore}%</h2>
-
-                    <h3>Focus Areas</h3>
-
-                    {focusAreas.map((area) => (
-                        <p key={area.name}>
-                            {area.name}: {area.score}%
-                        </p>
-                    ))}
-                </div>
-            )}
+           {overallScore !== null && (
+    <ReadinessCard
+        overallScore={overallScore}
+        focusAreas={focusAreas}
+    />
+)}
 
             {message && <p>{message}</p>}
         </div>
