@@ -3,6 +3,9 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+
+const readinessRoutes = require("./routes/readinessRoutes");
+
 //const authMiddleware = require("./middleware/authMiddleware");
 dotenv.config();
 
@@ -14,7 +17,10 @@ app.use(express.json());
 connectDB();
 
 app.use("/api/auth", authRoutes);
+app.use("/api/readiness", readinessRoutes);
 
+// app.use("/api/auth", authRoutes);
+// app.use("/api/readiness", readinessRoutes);
 // app.get("/api/protected", authMiddleware, (req, res) => {
 //     res.json({
 //         message: "You are authenticated",
